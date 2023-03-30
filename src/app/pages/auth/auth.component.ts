@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import {MessageService} from 'primeng/api';
+
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private authService: AuthService) { }
+  isTabCaching: boolean = false;
 
   ngOnInit(): void {
+   
   }
 
 }

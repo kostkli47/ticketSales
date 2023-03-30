@@ -1,0 +1,25 @@
+.ticket-item{
+    height: 300px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & .ticket-title{
+        padding: 2px;
+        text-align: center;
+    }
+
+    & img{
+        height: 250px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        
+    }
+}
+
+.ticket-item:hover{
+    transform: scale(105%);
+    transition: all .7s;
+    font-weight: 700;
+}
