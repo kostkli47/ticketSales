@@ -1,11 +1,12 @@
-<div class="d-flex justify-content-start mx-5 m-3">
-    <input (input) ="findTours($event)" type="text" placeholder="Поиск" pInputText>
-</div>
+
 
 <div *ngIf="tickets">
-    <div class="mx-5 m-3">
-      <p>Количество элементов: {{tourWrap.childElementCount}}</p> 
-      <p>Активный элемент: {{blockDirective.activeElementIndex}}</p>
+    <div class="mx-5 m-3 ">
+        <div>
+            <input (input) ="findTours($event)" type="text" placeholder="Поиск" pInputText>
+        </div>
+        <p>Количество элементов: {{tourWrap.childElementCount}}</p> 
+        <p>Активный элемент: {{blockDirective.activeElementIndex}}</p>
     </div>
     <div appBlocksStyle
         #tourWrap
