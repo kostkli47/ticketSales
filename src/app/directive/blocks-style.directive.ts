@@ -74,7 +74,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
       
     }
     this.activeElementIndex = this.index;
-    this.items[this.index].scrollIntoView();
+    this.items[this.index].scrollIntoView(false);
   }
 
   initStyle(index:number){
