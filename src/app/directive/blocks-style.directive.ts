@@ -22,7 +22,6 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit():void{
-
   }
 
   ngAfterViewInit(){
@@ -31,7 +30,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
       this.items = this.el.nativeElement.querySelectorAll(this.selector);
       if (this.initFirst) {
         if (this.items[0]) {
-          (this.items[0] as HTMLElement).setAttribute('style', 'border:2px solid red');
+          (this.items[0] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)');
         }
       }
     } else {
@@ -57,23 +56,33 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     if (ev.key === 'ArrowRight') {
       this.index++;
       if (this.items[this.index]) {
-        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:2px solid red')
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+      } else if (this.items.length-1) {
+        this.index= this.items.length-1;
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
       }
+
+
     } else if (ev.key === 'ArrowLeft') {
       this.index --;
       if (this.items[this.index]){
-        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:2px solid red')
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+      } else if (this.index = -1){
+        this.index = 0;
+          (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
       }
-
-     
     
     }
     this.activeElementIndex = this.index
   }
 
   initStyle(index:number){
+    
+    this.index = index;
+    this.activeElementIndex = this.index;
+   
     if( this.items[index]){
-      (this.items[index] as HTMLElement).setAttribute('style', 'border:2px solid red'); 
+      (this.items[index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)'); 
       }
     } 
   }

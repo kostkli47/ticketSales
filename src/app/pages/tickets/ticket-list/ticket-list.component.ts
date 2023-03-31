@@ -42,7 +42,7 @@ export class TicketListComponent implements OnInit {
   directiveRenderComplete(ev: boolean){
      const el:HTMLElement = this.tourWrap.nativeElement;
      el.setAttribute('Style', 'background-color : #F9F6F6')
-      this.blockDirective.initStyle(0)
+      this.blockDirective.initStyle(3)
   }
 
   findTours(ev: Event):void {
