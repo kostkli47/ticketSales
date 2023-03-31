@@ -6,7 +6,7 @@
             <input (input) ="findTours($event)" type="text" placeholder="Поиск" pInputText>
         </div>
         <p>Количество элементов: {{tourWrap.childElementCount}}</p> 
-        <p>Активный элемент: {{blockDirective.activeElementIndex}}</p>
+        <p>Активный элемент: {{blockDirective.activeElementIndex+1}}</p>
     </div>
     <div appBlocksStyle
         #tourWrap
