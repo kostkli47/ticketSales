@@ -10,11 +10,11 @@ export class UserService {
   constructor() { }
 
   getUser(): IUser { 
-    return this.user// возвращается user
+    return this.user;// возвращается user
   };
 
   setUser(user: IUser) {
-    this.user = user
+    this.user = user;
   };
 }
 

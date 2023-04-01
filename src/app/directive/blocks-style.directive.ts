@@ -30,7 +30,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
       this.items = this.el.nativeElement.querySelectorAll(this.selector);
       if (this.initFirst) {
         if (this.items[0]) {
-          (this.items[0] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)');
+          (this.items[0] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149); transform: translateY(-5px)');
         }
       }
     } else {
@@ -56,20 +56,20 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     if (ev.key === 'ArrowRight') {
       this.index++;
       if (this.items[this.index]) {
-        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149); transform: translateY(-5px)')
       } else if (this.items.length-1) {
         this.index= this.items.length-1;
-        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149); transform: translateY(-5px)')
       }
      
 
     } else if (ev.key === 'ArrowLeft') {
       this.index --;
       if (this.items[this.index]){
-        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+        (this.items[this.index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165);  box-shadow: 10px 5px 5px rgb(149, 149, 149);transform: translateY(-5px)')
       } else if (this.index = -1){
         this.index = 0;
-          (this.items[this.index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)')
+          (this.items[this.index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149);transform: translateY(-5px)')
       }
     
     }
@@ -83,7 +83,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     this.activeElementIndex = this.index;
    
     if( this.items[index]){
-      (this.items[index] as HTMLElement).setAttribute('style', 'border:3px solid red; font-weight:700; box-shadow: 10px 5px 5px rgb(149, 149, 149)'); 
+      (this.items[index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149);transform: translateY(-5px)'); 
       }
     } 
   }

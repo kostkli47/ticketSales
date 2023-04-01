@@ -1,5 +1,5 @@
 .ticket-item{
-    height: 300px;
+    height: 370px;
     border: 2px solid #000000;
     border-radius: 12px;
     display: flex;
@@ -7,14 +7,40 @@
     justify-content: space-between;
     
     & .ticket-title{
-        padding: 2px;
+        padding: 5px;
         text-align: center;
+        font-size: 14px;
+        font-weight: 700;
     }
 
     & img{
         height: 200px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+    }
+    & .ticket-descr{
+        font-size: 12px;
+        text-align: center;
+    }
+
+    & .ticket-price{
+        display:flex;
+        justify-content: space-between;
+        margin: 0 50px;
+        margin-bottom: 15px;
+        span {
+            font-weight: 700;
+        }
+    }
+    & button{
+        border: 1px solid rgb(101, 100, 100);
+        border-radius: 12px;
+        font-size: 14px;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+    & button:hover{
+        background: rgb(165, 193, 165);
+        transition: all .5s;
         
     }
 }
