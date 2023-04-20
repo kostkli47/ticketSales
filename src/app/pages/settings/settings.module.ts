@@ -7,7 +7,7 @@ import { SettingsComponent } from './settings.component';
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -15,3 +15,5 @@ import { SettingsComponent } from './settings.component';
   ]
 })
 export class SettingsModule { }
+
+

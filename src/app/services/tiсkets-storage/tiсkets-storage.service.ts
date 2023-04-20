@@ -5,7 +5,7 @@ import { ITour } from 'src/app/models/tours';
   providedIn: 'root'
 })
 export class TiсketsStorageService {
-  private ticketStorage: ITour[]
+  private ticketStorage: ITour[];
 
   constructor() { }
 
@@ -16,4 +16,5 @@ export class TiсketsStorageService {
   getStorage(): ITour[] {
      return this.ticketStorage
   }
+
 }

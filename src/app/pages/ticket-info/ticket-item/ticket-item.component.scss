@@ -1,0 +1,29 @@
+.ticket-info {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    & .ticket-name {
+        font-size: 20px;
+    }
+    & .ticket-img {
+        font-size: 20px;
+    }
+}
+
+
+button{
+    border: 1px solid rgb(101, 100, 100);
+    border-radius: 12px;
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+button:hover{
+    background: rgb(165, 193, 165);
+    transition: all .5s;
+    
+}

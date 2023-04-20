@@ -14,10 +14,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() menuType: IMenuType;
   items: MenuItem[];
   time: Date;
-  user: IUser; //
+  user: IUser | null; //
 
   private timerInterval: number;
-  private settingsActive: boolean = true;
+  private settingsActive: boolean = false;
  
   
   constructor(private userService:UserService) { } //
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.log('run')
       }, 1000);
 
-      this.user = this.userService.getUser(); //
+      this.user = <IUser> this.userService.getUser(); //
   }
 
  
@@ -60,7 +60,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       },
       {
         label: 'Выйти',
-        routerLink:['/auth']
+        routerLink:['/auth'],
+        command: () => {
+          this.userService.deleteToken();
+        } 
       },
  
     ];

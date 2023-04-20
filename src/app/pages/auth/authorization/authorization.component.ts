@@ -46,12 +46,15 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
 
       const authUser: IUser ={
         psw: this.psw,
-        login: this.login
+        login: this.login,
+        cardNumber: this.cardNumber
       }
       
       if(this.authService.checkUser(authUser)){
+        this.userService.setUser(authUser)
+        this.userService.setToken(this.login); // в качестве значения передаем рандомный токен типа стринг
+
         this.router.navigate(['tickets/tickets-list'])
-        this.userService.setUser(authUser) //
     } else {
       this.messageService.add({severity:'error', summary:'Неверные данные'})
     }
