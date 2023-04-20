@@ -46,7 +46,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     
   }
 
-  initKeyUp(ev: KeyboardEvent): void {
+  initKeyUp(ev: KeyboardEvent): void  {
     console.log('ev', ev);
    
     if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
@@ -74,7 +74,10 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     
     }
     this.activeElementIndex = this.index;
-    this.items[this.index].scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
+
+    if (this.items[this.index]){
+      this.items[this.index].scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
+    }
   }
 
   initStyle(index:number){
@@ -86,7 +89,17 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
       (this.items[index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149);transform: translateY(-5px)'); 
       }
     } 
-  }
 
+    updateItems(): void {
+      this.items = this.el.nativeElement.querySelectorAll(this.selector);
+    }
+
+    removeItems():void {
+      if (this.items[this.index]) {
+        (this.items[this.index] as HTMLElement).removeAttribute('style');
+      }
+      
+    }
+}
 
 
