@@ -52,7 +52,6 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
     (this.items[this.index] as HTMLElement).removeAttribute('style');
   }
-
     if (ev.key === 'ArrowRight') {
       this.index++;
       if (this.items[this.index]) {
@@ -100,6 +99,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
       }
       
     }
-}
+  }
+    
 
 

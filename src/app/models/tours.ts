@@ -16,10 +16,19 @@ export interface ITourTypeSelect {
   }
 
 export interface INearestTour extends ITour {
-    locationId: string
+    locationId: string,
 }
 
 export interface ITourLocation {
     name: string,
     id: string
+}
+
+export interface ITourById extends ITour {
+    name:string,
+    id:string
+}
+
+export interface ICustomTicketData extends INearestTour  {
+    region: ITourLocation
 }

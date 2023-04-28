@@ -3,25 +3,30 @@
 <div *ngIf="tickets">
     <div class="mx-5 m-3 ">
         <div>
-            <input (input) ="findTours($event)" 
+            <input  #ticketSearch 
             type="text" 
-            [(ngModel)] = "inputSearch"
+            [(ngModel)] = "ticketSearchValue"
             placeholder="Поиск" pInputText
             >
         </div>
-        <div id="target">
+        <div *ngIf = loadCountBlock>
             <p>Количество туров: {{tickets.length}}</p>
             <p>Текущий тур: {{blockDirective.activeElementIndex+1}}</p> 
         </div>
+
+        <div *ngIf="loadBlock" class="ticket-noTours" >
+            <h2 class="ticket-noToursText">Туры не найдены</h2>
+        </div>
         
     </div>    
+    <div>
     <div appBlocksStyle
         #tourWrap
         #blockDirective='blocksStyle'
         [selector]="'.ticket-item'"
         [initFirst]="false"
         (renderComplete)="directiveRenderComplete($event)"
-    class="d-flex flex-wrap justify-content-around ">
+        class="d-flex flex-wrap justify-content-around ">
 
 
         <div class="ticket-item col-3 m-3"
@@ -38,5 +43,6 @@
                     <span>{{item.price}}</span>
                 </div>
         </div>
+    </div>
     </div>
 </div>

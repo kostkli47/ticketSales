@@ -17,9 +17,12 @@
       <p-calendar (onSelect)="selectDate($event)" ></p-calendar>
     </div>
     
-      <button type="button" pButton pRipple (click)="initRestError()" label="Кнопка" class="p-button-success"></button>
+    <div class="mt-3">
+      <button type="button" pButton pRipple (click)="initRestError()" label="Кнопка" class="p-button-warn"></button>
+    </div>
 
-      <button  (click)="initSettingsData()" class="btn btn-sm">Обновить настройки</button>
+  <div class="mt-3">
+      <button  (click)="initSettingsData()" class="p-button-success">Обновить настройки</button>
   </div>
 
 

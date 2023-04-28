@@ -39,4 +39,13 @@ export class AuthService {
     const isUserExists = this.usersStorage.find((el:IUser) => el.login === user.login);
     return !!isUserExists;
   }
+
+  delUser(user:IUser): void{
+    const isUserExists = this.usersStorage.find((el:IUser) => el.login === user.login);
+    if (isUserExists) {
+      const value = this.usersStorage.findIndex (v => v.login === user.login);
+
+      this.usersStorage.splice (value, 1);
+    };
+  }
 }

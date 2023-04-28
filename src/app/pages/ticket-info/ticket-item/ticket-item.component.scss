@@ -1,6 +1,23 @@
-.ticket-info {
-    width: 800px;
+.ticket-info-input-wrap span {
+    width: 150px;
+    display: inline-block;
+    
+}
+.user-info{
     margin: 0 auto;
+    margin-left: 35%;
+}
+
+
+.personal-info {
+    margin: 0 auto;
+}
+
+.ticket-info {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
     text-align: center;
     border: 2px solid black;
     border-radius: 20px;
@@ -8,10 +25,16 @@
         font-size: 20px;
     }
     & .ticket-img {
-        font-size: 20px;
+        margin: 0 auto;
+        & .ticket-img-tour{
+            width: 400px;
+        }
     }
 }
 
+.ticket-header{
+    text-align: center;
+}
 
 button{
     border: 1px solid rgb(101, 100, 100);
