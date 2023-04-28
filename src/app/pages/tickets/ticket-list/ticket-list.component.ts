@@ -22,6 +22,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
   inputSearch: string;
   loadCountBlock: boolean;
   loadBlock: boolean;
+  directiveReady = false;
 
 
 
@@ -33,6 +34,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ticketSearch') ticketSearch: ElementRef;
   searchTicketSub: Subscription;
   ticketSearchValue: string;
+  ticketsLoad =false;
 
 
 
@@ -49,7 +51,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.ticketsCopy = [...this.tickets];
         this.ticketStorage.setStorage(data);
         this.filterData.type = [...data]; 
-        
+       this.ticketsLoad = true; 
       }
     );
     this.loadCountBlock = true;
@@ -96,12 +98,13 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
 
       debounceTime(200)).subscribe((ev:any)=>{
      
-        /* if (this.ticketSearchValue) {
-          this.tickets = this.ticketsCopy.filter((el)=> el.name.toLowerCase().includes(this.ticketSearchValue));
-        } else {
-          this.tickets = this.filterData.type? [...this.filterData.type]:[...this.ticketsCopy];
-        } */
-       this.findTours(ev)
+        if (this.ticketSearchValue) {
+          this.tickets = this.tickets.filter((el) => el.name.toLowerCase().includes(this.ticketSearchValue));
+        
+      } else  {
+        this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
+      } 
+   
 
         if (this.tickets.length <=0) {
           this.loadBlock = true;
@@ -111,7 +114,8 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
           this.loadBlock = false;
           this.loadCountBlock = true;
         }    
-      });       
+      });    
+      this.blockDirective.updateItems();   
 }
 
   ngOnDestroy() {
@@ -130,9 +134,10 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
     const el:HTMLElement = this.tourWrap.nativeElement;
      el.setAttribute('Style', 'background-color : #F9F6F6')
       this.blockDirective.initStyle(0); 
+      this.directiveReady = true;
   }
  
-  findTours(ev: Event | string):void {
+/*   findTours(ev: Event | string):void {
     console.log('ev', ev)
       const ticketSearchValue = typeof ev === "string" ? ev : (<HTMLInputElement>ev?.target).value.toLowerCase();
 
@@ -143,6 +148,20 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
     } else  {
       this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
     } 
-  }    
+  }    */ 
   }
 
+
+
+
+
+
+
+  
+
+
+     /* if (this.ticketSearchValue) {
+          this.tickets = this.ticketsCopy.filter((el)=> el.name.toLowerCase().includes(this.ticketSearchValue));
+        } else {
+          this.tickets = this.filterData.type? [...this.filterData.type]:[...this.ticketsCopy];
+        } */

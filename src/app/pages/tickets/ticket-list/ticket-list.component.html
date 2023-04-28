@@ -11,7 +11,7 @@
         </div>
         <div *ngIf = loadCountBlock>
             <p>Количество туров: {{tickets.length}}</p>
-            <p>Текущий тур: {{blockDirective.activeElementIndex+1}}</p> 
+            <p *ngIf = "directiveReady">Текущий тур: {{blockDirective.activeElementIndex+1}}</p> 
         </div>
 
         <div *ngIf="loadBlock" class="ticket-noTours" >
@@ -22,6 +22,7 @@
     <div>
     <div appBlocksStyle
         #tourWrap
+        *ngIf = "ticketsLoad"
         #blockDirective='blocksStyle'
         [selector]="'.ticket-item'"
         [initFirst]="false"
