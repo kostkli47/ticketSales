@@ -96,12 +96,13 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
 
       debounceTime(200)).subscribe((ev:any)=>{
      
-        if (this.ticketSearchValue) {
+        /* if (this.ticketSearchValue) {
           this.tickets = this.ticketsCopy.filter((el)=> el.name.toLowerCase().includes(this.ticketSearchValue));
         } else {
           this.tickets = this.filterData.type? [...this.filterData.type]:[...this.ticketsCopy];
-        }
-       
+        } */
+       this.findTours(ev)
+
         if (this.tickets.length <=0) {
           this.loadBlock = true;
           this.loadCountBlock = false;
@@ -131,7 +132,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.blockDirective.initStyle(0); 
   }
  
-   /* findTours(ev: Event | string):void {
+  findTours(ev: Event | string):void {
     console.log('ev', ev)
       const ticketSearchValue = typeof ev === "string" ? ev : (<HTMLInputElement>ev?.target).value.toLowerCase();
 
@@ -142,6 +143,6 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
     } else  {
       this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
     } 
-  }    */
+  }    
   }
 
