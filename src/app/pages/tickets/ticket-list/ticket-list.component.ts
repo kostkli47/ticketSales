@@ -1,4 +1,5 @@
 import { style } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, debounceTime, fromEvent } from 'rxjs';
@@ -42,9 +43,14 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private ticketsService: TicketsService,
               private router: Router,
               private ticketStorage: TiсketsStorageService,
-              private userService:UserService) { }
+              private userService:UserService,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.ticketsService.ticketUpdateSubject$.subscribe((data)=>{
+      this.tickets = data;
+    })
+
     this.ticketsService.getTickets().subscribe(
       (data) => {
         this.tickets = data;
@@ -64,28 +70,35 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
       switch (data.value) {
         case "single":
           this.tickets = this.ticketsCopy.filter((el) => el.type === "single");
+          this.loadBlock = false;
+          this.ticketSearchValue = '';
           break;
         case "multi":
           this.tickets = this.ticketsCopy.filter((el) => el.type === "multi");
+          this.loadBlock = false;
+          this.ticketSearchValue = '';
           break;
         case "all":
           this.tickets = [...this.ticketsCopy];
+          this.loadBlock = false;
+          this.ticketSearchValue = '';
           break;
       } 
-      
- 
+
+    
       this.filterData.type = [...this.tickets] 
+
       if (data.date) {
         const dateWithoutTime = new Date(data.date).toISOString().split('T');
         const dateValue = dateWithoutTime[0]
         console.log('dateValue',dateValue)
         this.tickets= this.ticketsCopy.filter((el) => el.date === dateValue);
+        
       }
-
-      setTimeout(() => {
+       setTimeout(() => {
         this.blockDirective.updateItems();
         this.blockDirective.initStyle(0);
-      });
+      }); 
     });
   }
 
@@ -98,24 +111,27 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
 
       debounceTime(200)).subscribe((ev:any)=>{
      
-        if (this.ticketSearchValue) {
-          this.tickets = this.tickets.filter((el) => el.name.toLowerCase().includes(this.ticketSearchValue));
-        
+      if (this.ticketSearchValue) {
+        this.tickets = this.tickets.filter((el) => el.name.toLowerCase().includes(this.ticketSearchValue));
+       
       } else  {
-        this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
+        this.tickets = this.filterData.type? [...this.filterData.type]:[...this.ticketsCopy];
+    
       } 
    
+        this.blockDirective.updateItems();
+        this.blockDirective.initStyle(0);
 
-        if (this.tickets.length <=0) {
+       if (this.tickets.length <=0) {
           this.loadBlock = true;
           this.loadCountBlock = false;
-         
+
         } else {
           this.loadBlock = false;
           this.loadCountBlock = true;
-        }    
+
+        }      
       });    
-      this.blockDirective.updateItems();   
 }
 
   ngOnDestroy() {
@@ -125,7 +141,8 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   goToTicketInfoPage(item:ITour) {
-    this.router.navigate([`/tickets/ticket/${item.id}`]);
+   
+    this.router.navigate([`/tickets/ticket/${item._id}`]);
     
   }
 
@@ -137,18 +154,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.directiveReady = true;
   }
  
-/*   findTours(ev: Event | string):void {
-    console.log('ev', ev)
-      const ticketSearchValue = typeof ev === "string" ? ev : (<HTMLInputElement>ev?.target).value.toLowerCase();
 
-  
-      if (ticketSearchValue) {
-        this.tickets = this.tickets.filter((el) => el.name.toLowerCase().includes(ticketSearchValue));
-      
-    } else  {
-      this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
-    } 
-  }    */ 
   }
 
 
@@ -156,7 +162,19 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
+ /*   findTours(ev: Event | string):void {
+    console.log('ev', ev)
+      const ticketSearchValue = typeof ev === "string" ? ev : (<HTMLInputElement>ev?.target).value.toLowerCase();
 
+
+    if (ticketSearchValue) {
+      this.tickets = this.tickets.filter((el) => el.name.toLowerCase().includes(ticketSearchValue));
+    
+  } else  {
+    this.tickets =  this.filterData.type? [...this.filterData.type] :[...this.ticketsCopy];
+  } 
+}    
+*/
   
 
 

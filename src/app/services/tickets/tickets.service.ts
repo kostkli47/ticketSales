@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TicketRestService } from '../rest/ticket-rest.service';
 import { Observable, Subject } from 'rxjs';
 import { ICustomTicketData, INearestTour, ITour, ITourLocation, ITourTypeSelect } from 'src/app/models/tours';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,13 @@ export class TicketsService {
   private ticketSubject = new Subject<ITourTypeSelect>();
   readonly ticketType$ = this.ticketSubject.asObservable(); 
 
+  private ticketUpdateSubject = new Subject<ITour[]>();
+  readonly ticketUpdateSubject$ = this.ticketUpdateSubject.asObservable();
 
 
-  constructor(private ticketServiceRest: TicketRestService) { }
+
+  constructor(private ticketServiceRest: TicketRestService,
+              private http: HttpClient) { }
   
   //2 вариант
   getTicketTypeObservable(): Observable<ITourTypeSelect> {
@@ -22,6 +27,10 @@ export class TicketsService {
     
    updateTour(type:ITourTypeSelect): void {  
      this.ticketSubject.next(type);  // происходит рассылка и все, кто подписан получат эти данные 
+   }
+
+   updateTicketList(data:ITour[]){
+    this.ticketUpdateSubject.next(data)
    }
 
   getTickets():Observable<ITour[]> {
@@ -56,6 +65,12 @@ export class TicketsService {
 
   sendTourData(data:any): Observable<any> {
     return this.ticketServiceRest.sendTourData(data);
+  }
+  getTicketById (id:string): Observable<ITour>{
+    return this.ticketServiceRest.getTicketById(id);
+  }
+  createTour(body: any) {
+    return this.ticketServiceRest.createTour(body)
   }
 
 }

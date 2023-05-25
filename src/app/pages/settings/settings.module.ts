@@ -7,18 +7,20 @@ import { SettingsComponent } from './settings.component';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
 import { StatisticComponent } from './statistic/statistic.component';
 import { TableModule } from 'primeng/table';
+import { TourLoaderComponent } from './tour-loader/tour-loader.component';
 
 
 
 @NgModule({
   declarations: [
     SettingsComponent,
-    StatisticComponent
+    StatisticComponent,
+    TourLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { TableModule } from 'primeng/table';
     FormsModule,
     ToastModule,
     PanelModule,
-    TableModule
+    TableModule,
+    ReactiveFormsModule
   ],
   providers:[MessageService]
 })

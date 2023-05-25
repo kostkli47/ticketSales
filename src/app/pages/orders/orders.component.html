@@ -1,0 +1,16 @@
+<p-table [value]="orders" [tableStyle]="{'min-width': '100%'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+        <tr>
+            <td *ngFor="let col of cols">
+                {{order[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

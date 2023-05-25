@@ -18,8 +18,8 @@ export class RestinterceptorsService implements HttpInterceptor {
 
      if (hasToken)  {
       const cloned = req.clone({                   //склонировали текущий запрос методом clone
-        headers: req.headers.set("Autorization",  // добавляем  новый заголовок
-        "Login " + hasToken)
+        headers: req.headers.set("Authorization",  // добавляем  новый заголовок
+        "Bearer " + hasToken)
       });
 
       return next.handle(cloned); // отправляем запрос методом handle

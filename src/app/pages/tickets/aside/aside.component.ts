@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IMenuType } from 'src/app/models/menuType';
 import { Output, EventEmitter } from '@angular/core';
-import { ITourTypeSelect } from 'src/app/models/tours';
+import { ITour, ITourTypeSelect } from 'src/app/models/tours';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { MessageService } from 'primeng/api';
 import { SettingsService } from 'src/app/services/settings/settings.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class AsideComponent implements OnInit {
 
   constructor(private ticketsService:TicketsService,
               private messageService: MessageService,
-              private settingsService: SettingsService ) { }
+              private settingsService: SettingsService,
+              private http: HttpClient ) { }
 
   ngOnInit(): void {
     this.menuTypes = [
@@ -63,6 +65,18 @@ initRestError(): void {
  initSettingsData():void {
   this.settingsService.loadUserSettingsSubject({
     saveToken:false
+  })
+ }
+
+ initTours(): void {
+  this.http.post<ITour[]>("http://localhost:3000/tours/", {}).subscribe((data)=>{
+    this.ticketsService.updateTicketList(data); // возвращает данные с сервера
+  })  
+ }
+
+ deleteTours(): void {
+  this.http.delete("http://localhost:3000/tours/").subscribe((data)=>{
+    this.ticketsService.updateTicketList([]);
   })
  }
 

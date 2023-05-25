@@ -53,10 +53,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         label: 'Билеты',
         routerLink:['tickets-list']
       },
+
+  
       {
         label: 'Настройки',
         routerLink:['settings'],
         visible: this.settingsActive
+      },
+
+      {
+        label: 'Заказы',
+        routerLink:['orders']
       },
       {
         label: 'Выйти',

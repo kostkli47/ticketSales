@@ -1,8 +1,11 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { ServerError } from 'src/app/models/error';
 import { IUser } from 'src/app/models/users';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ConfigService } from 'src/app/services/config/config.service';
+
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +15,6 @@ import { ConfigService } from 'src/app/services/config/config.service';
 export class RegistrationComponent implements OnInit {
   login:string;
   psw:string;
-
   pswRepeat:string; 
   email:string;
   cardNumber:string;
@@ -20,7 +22,8 @@ export class RegistrationComponent implements OnInit {
   showCardNumber: boolean
 
   constructor(private messageService: MessageService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
     this.showCardNumber = ConfigService.config.useUserCard;
@@ -39,8 +42,30 @@ export class RegistrationComponent implements OnInit {
       psw: this.psw,
       cardNumber: this.cardNumber,
       login: this.login,
-      email: this.email
+      email: this.email,
     }
+
+    const userNest = {
+      age: 30,
+      name: 'Test'
+    }
+
+    this.http.post<IUser>('http://localhost:3000/users/', userObj).subscribe((data) => {
+      if (this.saveLocalStorage) {
+        const objUserJsonStr = JSON.stringify(userObj);
+        window.localStorage.setItem('user_'+userObj.login, objUserJsonStr);
+      }
+      this.messageService.add({severity:'success', summary:'Регистрация прошла успешно'});
+ 
+    }, (err: HttpErrorResponse)=> {
+      console.log('err', err)
+      const serverError = <ServerError>err.error;
+      this.messageService.add({severity:'warn', summary: serverError.errorText})
+      
+    });
+
+
+  /*   this.http.post('http://localhost:3000/users/', userObj).subscribe((data)=>{})
 
     if (!this.authService.isUserExists(userObj)){
       this.authService.setUser(userObj);
@@ -51,8 +76,10 @@ export class RegistrationComponent implements OnInit {
       this.messageService.add({severity:'success', summary:'Регистрация прошла успешно'});
     } else {
       this.messageService.add({severity:'warn', summary:'Пользователь уже зарегистрирован'});
-    }
+    } */
 
     
   }
 }
+
+

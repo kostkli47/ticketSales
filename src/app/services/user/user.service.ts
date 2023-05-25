@@ -10,11 +10,11 @@ export class UserService {
   private token: string | undefined;
   constructor() { }
 
-  getUser(): IUser | void { 
-    if (this.user) {
-      return this.user;
-    }
-  };
+getUser(): IUser | void { 
+  if (this.user) {
+    return this.user;
+  }
+}; 
 
   setUser(user: IUser) {
     this.user = user;
@@ -23,6 +23,9 @@ export class UserService {
   setToken(token:string): void {  //записывает в приватное поле token
     this.token = token;
     window.localStorage.setItem ('token', this.token);
+  }
+  setToStore(token:string){
+    window.localStorage.getItem('token')
   }
 
   getToken():string | void{
@@ -47,3 +50,8 @@ export class UserService {
 
 
 
+/* getUser(): IUser | void { 
+  if (this.user) {
+    return this.user;
+  }
+}; */

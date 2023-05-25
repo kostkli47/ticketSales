@@ -80,7 +80,7 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
   }
 
   initStyle(index:number){
-  
+    this.index = index;
     if( this.items[index]){
       (this.items[index] as HTMLElement).setAttribute('style', 'border:5px solid rgb(165, 193, 165); box-shadow: 10px 5px 5px rgb(149, 149, 149);transform: translateY(-5px)'); 
       }

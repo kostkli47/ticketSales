@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IOrder } from 'src/app/models/order';
 import { INearestTour, ITour, ITourById, ITourLocation } from 'src/app/models/tours';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class TicketRestService {
   constructor(private http: HttpClient) { }
 
   getTickets(): Observable<ITour[]> {
-    return this.http.get<ITour[]>('https://62b9e756ff109cd1dc9dae16.mockapi.io/apiv/v1/tours/');
+    return this.http.get<ITour[]>('http://localhost:3000/tours/');
   }
 
   getRestError(): Observable<any> {
@@ -39,8 +40,17 @@ export class TicketRestService {
     }
   }
   
-  sendTourData(data:any): Observable<any>{
-    return this.http.post('/assets/mocks/nearestTours2.json', data)
+  sendTourData(data:IOrder): Observable<any>{
+    return this.http.post("http://localhost:3000/order/", data)
   }
 
+  getTicketById (id:string): Observable<ITour>{
+    return this.http.get<ITour>("http://localhost:3000/tours/"+id)
+  }
+
+  createTour(body:any): Observable<any>{
+    return this.http.post("http://localhost:3000/tour-item/", body, {headers: {
+      
+    }})
+  }
 }
